@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify # type: ignore
 import json
-from datubaze import get_top_results, pievienot
+from datubaze import get_top_results,pievienot_rezultatu
 
 app = Flask(__name__)
 
@@ -21,25 +21,22 @@ def about():
     return render_template("about.html")
 
 @app.route('/topData', methods=['GET'])
-def top_data():
+def add_result():
     try:
-        top_rezultati = get_top_results()  # Izmanto importēto funkciju
-        # Atlasīt top 5 pēc klikšķu skaita un laika
+        # Saņem datus no POST pieprasījuma
+        dati = request.json
+        # Saglabā rezultatu datubāze
+        pievienot_rezultatu(dati)  
+        # Atjauno top rezultātu sarakstu
+        top_rezultati = get_top_results()
         top_5 = sorted(top_rezultati, key=lambda x: (x['klikski'], x['laiks']))[:5]
-        return jsonify(top_5), 200
-    except Exception:
-        return jsonify({'status': 'error'}), 500
-
-@app.route('/pievienot-rezultatu', methods=['POST'])
-def pievienot_rezultatu():
-    dati = request.json
-    try:
-        pievienot(dati)  # Saglabā rezultātus datubāzē
-        top_5 = sorted(get_top_results(), key=lambda x: (x['klikski'], x['laiks']))[:5]
         # Saglabā top 5 rezultātus JSON failā
         with open('result.json', 'w', encoding='utf-8') as fail:
             json.dump(top_5, fail, ensure_ascii=False, indent=4)
         return jsonify({'status': 'success'}), 200
+    except Exception:
+        return jsonify({'status': 'error'}), 500
+        return jsonify(top_5), 200
     except Exception:
         return jsonify({'status': 'error'}), 500
 
