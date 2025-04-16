@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Par Mani</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .ball {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: relative;
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0% { top: 0; }
+            50% { top: 50px; }
+            100% { top: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Par Mani</h1>
+    <p>Es esmu piemērs, kas parāda bumbu, kas lec uz leju un uz augšu.</p>
+    <div class="ball"></div>
+    <br>
+    <a href="/">Atpakaļ uz sākumu</a>
+</body>
+</html>
