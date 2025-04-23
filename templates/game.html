@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spēle - Atrodi Bumbu</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8" />
+  <title>Spēle – Atrodi Bumbu</title>
+  <link rel="stylesheet" href="static/css/style.css" />
 </head>
 <body>
-  <header>
-    <h1>Spēle: Atrodi Bumbu!</h1>
-  </header>
-  <main>
+  <div class="wrapper">
+    <h1>🎯 Atrodi Bumbu!</h1>
+    
     <div id="game-container">
-      <canvas id="game-canvas" width="800" height="600"></canvas>
+      <div id="ball" onclick="moveBall()"></div>
     </div>
-    <section id="score-board">
-      <p>Punkti: <span id="score">0</span></p>
-    </section>
-    <section id="instructions">
-      <p>Klikšķini uz spēles lauka, lai atrastu bumbu!</p>
-    </section>
-  </main>
-  <script src="/static/scripts.js"></script>
+
+    <div class="scoreboard">
+      <p>🏆 Punkti: <span id="score">0</span></p>
+      <p>⏱️ Atlikušais laiks: <span id="time">30</span> sek.</p>
+    </div>
+
+    <div class="controls">
+      <button onclick="restartGame()">🔁 Restartēt spēli</button>
+      <a href="index.html"><button>🏠 Atpakaļ uz sākumu</button></a>
+    </div>
+  </div>
+
+  <script src="static/js/game.js"></script>
 </body>
 </html>
+

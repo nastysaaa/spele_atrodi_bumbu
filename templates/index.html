@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sākumlapa</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spēle Atrodi Bumbu</title>
+  <link rel="stylesheet" href="static/css/style.css" />
 </head>
 <body>
-  <header>
-    <h1>Sveicināti Spēlē "Atrodi Bumbu"</h1>
-    <nav>
-      <a href="/game">Sākt Spēli</a>
-      <a href="/top">Rezultāti</a>
-      <a href="/about">Par Spēli</a>
-    </nav>
-  </header>
-  <main>
-    <p>Šeit būs ievads spēlei un norādes, kā spēlēt.</p>
-  </main>
+  <div class="wrapper">
+    <h1>🎯 Atrodi Bumbu!</h1>
+    
+    <div id="game-container">
+      <div id="ball" onclick="moveBall()"></div>
+    </div>
+
+    <div class="scoreboard">
+      <p>🏆 Punkti: <span id="score">0</span></p>
+      <p>⏱️ Atlikušais laiks: <span id="time">30</span> sek.</p>
+    </div>
+
+    <div class="controls">
+      <button onclick="restartGame()">🔁 Restartēt spēli</button>
+    </div>
+  </div>
+
+  <script src="static/js/game.js"></script>
 </body>
 </html>

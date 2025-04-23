@@ -2,35 +2,18 @@
 <html lang="lv">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Top Rezultāti</title>
-  <link rel="stylesheet" href="/static/style.css">
+  <title>Top 5 Rezultāti</title>
+  <link rel="stylesheet" href="static/css/style.css" />
 </head>
 <body>
-  <header>
-    <h1>Augstākie Rezultāti</h1>
-    <nav>
-      <a href="/">Sākumlapa</a>
-      <a href="/game">Spēle</a>
-      <a href="/about">Par Spēli</a>
-    </nav>
-  </header>
-  <main>
+  <div class="wrapper">
+    <h1>🏅 Top 5 Spēlētāji</h1>
     <div id="results-container">
-      <!-- Rezultāti tiks ielādēti ar AJAX pieprasījumu -->
+      <p>🔄 Ielādē rezultātus...</p>
     </div>
-  </main>
-  <script>
-    fetch("/topData")
-      .then(response => response.json())
-      .then(data => {
-        const container = document.getElementById("results-container");
-        container.innerHTML = "<h2>Top 5 Rezultāti</h2>";
-        data.forEach(result => {
-          container.innerHTML += <p>${result.vards} – Punkti: ${result.score}, Klikšķi: ${result.klikski}, Laiks: ${result.laiks}</p>;
-        });
-      })
-      .catch(error => console.error("Kļūda ielādējot rezultātus:", error));
-  </script>
+    <a href="index.html"><button>🏠 Atpakaļ uz sākumu</button></a>
+  </div>
+
+  <script src="static/js/top.js"></script>
 </body>
 </html>
