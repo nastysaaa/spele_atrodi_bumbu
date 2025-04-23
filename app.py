@@ -49,3 +49,8 @@ def submit_result():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+    from datubaze import create_db, pievienot_rezultatu, get_top_results
+
+# Automātiski izveido DB, ja tā vēl nav
+create_db()
