@@ -1,44 +1,51 @@
-from flask import Flask, render_template, request, jsonify # type: ignore
+from flask import Flask, render_template, jsonify, request
 import json
-from datubaze import get_top_results,pievienot_rezultatu
 
 app = Flask(__name__)
 
+# Funkcija, lai iegūtu top 5 rezultātus
+def get_top_results():
+    try:
+        with open('data/results.json', 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+
+# Mājas lapa
 @app.route('/')
-def index():
-    return render_template("index.html")
+def home():
+    return render_template('index.html')
 
-@app.route('/game')
-def game():
-    return render_template("game.html")
-
-@app.route('/top')
-def top():
-    return render_template("top.html")
-
+# Par spēli
 @app.route('/about')
 def about():
-    return render_template("about.html")
+    return render_template('about.html')
 
-@app.route('/topData', methods=['GET'])
-def add_result():
+# Spēles lapa
+@app.route('/game')
+def game():
+    return render_template('game.html')
+
+# Top rezultāti
+@app.route('/top')
+def top():
+    top_results = get_top_results()
+    return render_template('top.html', results=top_results)
+
+# Saglabā rezultātus
+@app.route('/submit_result', methods=['POST'])
+def submit_result():
+    new_result = request.json
     try:
-        # Saņem datus no POST pieprasījuma
-        dati = request.json
-        # Saglabā rezultatu datubāze
-        pievienot_rezultatu(dati)  
-        # Atjauno top rezultātu sarakstu
-        top_rezultati = get_top_results()
-        top_5 = sorted(top_rezultati, key=lambda x: (x['klikski'], x['laiks']))[:5]
-        # Saglabā top 5 rezultātus JSON failā
-        with open('result.json', 'w', encoding='utf-8') as fail:
-            json.dump(top_5, fail, ensure_ascii=False, indent=4)
+        results = get_top_results()
+        results.append(new_result)
+        # Saglabāt rezultātus
+        with open('data/results.json', 'w', encoding='utf-8') as f:
+            json.dump(results, f, ensure_ascii=False, indent=4)
         return jsonify({'status': 'success'}), 200
-    except Exception:
-        return jsonify({'status': 'error'}), 500
-        return jsonify(top_5), 200
-    except Exception:
+    except Exception as e:
+        print(f"Error: {e}")
         return jsonify({'status': 'error'}), 500
 
-if __name__ == '_main_':
-  app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
