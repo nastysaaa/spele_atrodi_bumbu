@@ -33,23 +33,31 @@ function startGame() {
   }, 1000);
 }
 
-function moveBall() {
-  if (!gameStarted) return;
-  score++;
-  document.getElementById("score").textContent = score;
 
-  const container = document.getElementById("game-container");
-  const ball = document.getElementById("ball");
-
-  const maxX = container.clientWidth - ball.offsetWidth;
-  const maxY = container.clientHeight - ball.offsetHeight;
-
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
-
-  ball.style.left = x + "px";
-  ball.style.top = y + "px";
-}
+ function moveBall() {
+     if (!gameStarted) return;
+      
+     const container = document.getElementById("game-container");
+       const ball = document.getElementById("ball");
+      
+     const maxX = container.clientWidth - ball.offsetWidth;
+    const maxY = container.clientHeight - ball.offsetHeight;
+      
+    if (maxX <= 0 || maxY <= 0) {
+  // Ja konteiners nav vēl izmērāms, mēģini vēlāk
+          setTimeout(moveBall, 100);
+          return;
+        }
+      
+        score++;
+        document.getElementById("score").textContent = score;
+      
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+      
+        ball.style.left = `${x}px`;
+        ball.style.top = `${y}px`;
+      }
 
 function restartGame() {
   clearInterval(timer);
