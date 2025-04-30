@@ -1,72 +1,83 @@
 body {
   margin: 0;
+  padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to bottom right, #74ebd5, #9face6);
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .wrapper {
   background: white;
   padding: 30px;
   border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   text-align: center;
   max-width: 500px;
   width: 100%;
 }
 
-#game-container {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  background-color: #fff;
-  border: 3px solid #555;
+h1 {
+  margin-bottom: 20px;
+  color: #444;
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.scoreboard p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.controls button {
+  margin: 10px 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
   border-radius: 10px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.controls button:hover {
+  background-color: #45a049;
+}
+
+#game-container {
   margin: 20px auto;
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  border: 2px dashed #ccc;
   overflow: hidden;
 }
 
 #ball {
-  position: absolute;
   width: 50px;
   height: 50px;
+  background-color: red;
   border-radius: 50%;
-  background: radial-gradient(circle, red 60%, darkred 100%);
+  position: absolute;
+  display: none;
+  transition: top 0.2s, left 0.2s;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  animation: bounce 0.8s infinite alternate;
 }
 
-input[type="text"] {
-  padding: 5px;
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.controls button {
-  background-color: #4CAF50;
-  color: white;
-  font-size: 16px;
-  border: none;
-  padding: 10px 25px;
-  margin-top: 20px;
-  border-radius: 8px;
-  cursor: pointer;
-}.fade-in {
-  opacity: 0;
-  animation: fadeIn 1.5s forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-
-.controls button:hover {
-  background-color: #388e3c;
+@keyframes bounce {
+  from { transform: scale(1); }
+  to { transform: scale(1.2); }
 }

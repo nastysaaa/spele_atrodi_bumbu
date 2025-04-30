@@ -1,77 +1,60 @@
 let score = 0;
 let timeLeft = 30;
 let timer;
-let ballSize = 50;
-let difficultyLevel = 1;
+let gameStarted = false;
 
-const ball = document.getElementById('ball');
-const container = document.getElementById('game-container');
-const scoreDisplay = document.getElementById('score');
-const timeDisplay = document.getElementById('time');
-
-function moveBall() {
-  const maxX = container.clientWidth - ballSize;
-  const maxY = container.clientHeight - ballSize;
-  const newX = Math.floor(Math.random() * maxX);
-  const newY = Math.floor(Math.random() * maxY);
-
-  ball.style.left = `${newX}px`;
-  ball.style.top = `${newY}px`;
-
-  score++;
-  scoreDisplay.textContent = score;
-
-  if (score % 10 === 0) {
-    difficultyLevel++;
-    ballSize = Math.max(25, ballSize - 5);
-    ball.style.width = `${ballSize}px`;
-    ball.style.height = `${ballSize}px`;
+function startGame() {
+  const name = document.getElementById("playerName").value.trim();
+  if (!name) {
+    alert("Lūdzu, ievadi savu vārdu!");
+    return;
   }
+
+  if (gameStarted) return;
+  gameStarted = true;
+
+  score = 0;
+  timeLeft = 30;
+  document.getElementById("score").textContent = score;
+  document.getElementById("time").textContent = timeLeft;
+
+  document.getElementById("ball").style.display = "block";
+  moveBall();
+
+  timer = setInterval(() => {
+    timeLeft--;
+    document.getElementById("time").textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(timer);
+      gameStarted = false;
+      document.getElementById("ball").style.display = "none";
+      alert(`${name}, laiks beidzies! Tavs rezultāts: ${score}`);
+    }
+  }, 1000);
 }
 
-function updateTime() {
-  timeLeft--;
-  timeDisplay.textContent = timeLeft;
+function moveBall() {
+  if (!gameStarted) return;
+  score++;
+  document.getElementById("score").textContent = score;
 
-  if (timeLeft <= 0) {
-    clearInterval(timer);
-    const name = document.getElementById('playerName').value.trim();
-    if (name) {
-      const result = {
-        vards: name,
-        score: score,
-        datums: new Date().toISOString()
-      };
-      fetch('/submit_result', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(result)
-      }).then(() => {
-        alert(`⏱️ Spēle beigusies!\n🎯 Tavi punkti: ${score}`);
-        window.location.href = '/top';
-      });
-    } else {
-      alert(`Spēle beigusies! Ievadi savu vārdu, lai saglabātu rezultātu.`);
-    }
-  }
+  const container = document.getElementById("game-container");
+  const ball = document.getElementById("ball");
+
+  const maxX = container.clientWidth - ball.offsetWidth;
+  const maxY = container.clientHeight - ball.offsetHeight;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  ball.style.left = x + "px";
+  ball.style.top = y + "px";
 }
 
 function restartGame() {
-  score = 0;
-  timeLeft = 30;
-  ballSize = 50;
-  difficultyLevel = 1;
-
-  scoreDisplay.textContent = score;
-  timeDisplay.textContent = timeLeft;
-
-  ball.style.width = `${ballSize}px`;
-  ball.style.height = `${ballSize}px`;
-
-  moveBall();
   clearInterval(timer);
-  timer = setInterval(updateTime, 1000);
+  gameStarted = false;
+  document.getElementById("score").textContent = "0";
+  document.getElementById("time").textContent = "30";
+  document.getElementById("ball").style.display = "none";
 }
-
-window.onload = restartGame;
-

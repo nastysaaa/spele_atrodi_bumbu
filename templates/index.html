@@ -2,35 +2,31 @@
 <html lang="lv">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Spēle Atrodi Bumbu</title>
-  <link rel="stylesheet" href="static/css/style.css" />
+  <title>Spēle – Atrodi Bumbu</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
   <div class="wrapper">
     <h1>🎯 Atrodi Bumbu!</h1>
     
-    <div id="game-container">
-      <div id="ball" onclick="moveBall()"></div>
-    </div>
-    <label for="playerName">Tavs vārds:</label>
+    <label for="playerName">Tavs vārds:</label><br />
     <input type="text" id="playerName" placeholder="Ievadi vārdu" />
 
+    <div class="controls">
+      <button onclick="startGame()">▶️ Sākt spēli</button>
+      <button onclick="restartGame()">🔁 Restartēt</button>
+    </div>
 
     <div class="scoreboard">
       <p>🏆 Punkti: <span id="score">0</span></p>
       <p>⏱️ Atlikušais laiks: <span id="time">30</span> sek.</p>
     </div>
-    <h1 id="welcome-text">Laipni lūdzam spēlē!</h1>
-    <button onclick="startGame()">Sākt spēli</button>
-    <button id="topScores()">Top Rezultāti</button>
-    <script src="{{ url_for('static', filename='js/sakums.js') }}"></script>
-    
-    <div class="controls">
-      <button onclick="restartGame()">🔁 Restartēt spēli</button>
+
+    <div id="game-container">
+      <div id="ball" onclick="moveBall()"></div>
     </div>
   </div>
 
-  <script src="static/js/game.js"></script>
+  <script src="{{ url_for('static', filename='js/game.js') }}"></script>
 </body>
 </html>
