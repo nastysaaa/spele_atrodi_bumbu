@@ -60,6 +60,11 @@ function restartGame() {
     clearInterval(timer);
     timer = setInterval(updateTime, 1000);
 }
+console.log("JS ielādēts!");
+
+function startGame() {
+  alert("Sākam spēli!");
+}
 
 // Rezultāta nosūtīšana uz serveri
 function submitResult() {
