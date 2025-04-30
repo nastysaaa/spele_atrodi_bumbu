@@ -6,24 +6,23 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
-  <div class="wrapper">
-    <h1>🎯 Atrodi Bumbu!</h1>
-    
-    <label for="playerName">Tavs vārds:</label><br />
-    <input type="text" id="playerName" placeholder="Ievadi vārdu" />
+  <div id="game-container">
+    <div id="ball" onclick="moveBall()"></div>
+    <div class="hud">
+      <h1>🎯 Atrodi Bumbu!</h1>
 
-    <div class="controls">
-      <button onclick="startGame()">▶️ Sākt spēli</button>
-      <button onclick="restartGame()">🔁 Restartēt</button>
-    </div>
+      <label for="playerName">Tavs vārds:</label><br />
+      <input type="text" id="playerName" placeholder="Ievadi vārdu" />
 
-    <div class="scoreboard">
-      <p>🏆 Punkti: <span id="score">0</span></p>
-      <p>⏱️ Atlikušais laiks: <span id="time">30</span> sek.</p>
-    </div>
+      <div class="controls">
+        <button onclick="startGame()">▶️ Sākt spēli</button>
+        <button onclick="restartGame()">🔁 Restartēt</button>
+      </div>
 
-    <div id="game-container">
-      <div id="ball" onclick="moveBall()"></div>
+      <div class="scoreboard">
+        <p>🏆 Punkti: <span id="score">0</span></p>
+        <p>⏱️ Atlikušais laiks: <span id="time">30</span> sek.</p>
+      </div>
     </div>
   </div>
 
