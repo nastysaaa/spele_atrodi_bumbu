@@ -1,68 +1,72 @@
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to bottom right, #74ebd5, #9face6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #74ebd5, #9face6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.wrapper {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+}
+
+#game-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background-color: #fff;
+  border: 3px solid #555;
+  border-radius: 10px;
+  margin: 20px auto;
+  overflow: hidden;
+}
+
+#ball {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle, red 60%, darkred 100%);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+input[type="text"] {
+  padding: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.controls button {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  padding: 10px 25px;
+  margin-top: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
   }
-  
-  .wrapper {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
-    text-align: center;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  h1 {
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  #game-container {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    background-color: #fff;
-    border: 3px solid #555;
-    border-radius: 10px;
-    margin: 0 auto;
-    overflow: hidden;
-  }
-  
-  #ball {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: radial-gradient(circle, red 60%, darkred 100%);
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  }
-  
-  .scoreboard p {
-    font-size: 18px;
-    margin: 10px 0;
-  }
-  
-  .controls button {
-    background-color: #4CAF50;
-    color: white;
-    font-size: 16px;
-    border: none;
-    padding: 10px 25px;
-    margin-top: 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .controls button:hover {
-    background-color: #388e3c;
-  }
-  
+}
+
+
+.controls button:hover {
+  background-color: #388e3c;
+}

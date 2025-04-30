@@ -13,12 +13,19 @@
     <div id="game-container">
       <div id="ball" onclick="moveBall()"></div>
     </div>
+    <label for="playerName">Tavs vārds:</label>
+    <input type="text" id="playerName" placeholder="Ievadi vārdu" />
+
 
     <div class="scoreboard">
       <p>🏆 Punkti: <span id="score">0</span></p>
       <p>⏱️ Atlikušais laiks: <span id="time">30</span> sek.</p>
     </div>
-
+    <h1 id="welcome-text">Laipni lūdzam spēlē!</h1>
+    <button id="start-game">Sākt spēli</button>
+    <button id="top-scores">Top Rezultāti</button>
+    <script src="{{ url_for('static', filename='js/sakums.js') }}"></script>
+    
     <div class="controls">
       <button onclick="restartGame()">🔁 Restartēt spēli</button>
     </div>

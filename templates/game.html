@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-    <meta charset="UTF-8">
-    <title>Spēle</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Spēle – Atrodi Bumbu</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 </head>
 <body>
-    <h1>Klikšķini uz bumbas!</h1>
+  <div class="wrapper">
+    <h1>🎯 Atrodi Bumbu!</h1>
+    
     <label for="playerName">Tavs vārds:</label>
-    <input type="text" id="playerName" placeholder="Ievadi vārdu">
+    <input type="text" id="playerName" placeholder="Ievadi vārdu" />
+
     <div id="game-container">
-        <div id="ball"></div>
+      <div id="ball" onclick="moveBall()"></div>
     </div>
-    <div id="stats">
-        Punkti: <span id="score">0</span> |
-        Laiks: <span id="time">30</span> sek.
+
+    <div class="scoreboard">
+      <p>🏆 Punkti: <span id="score">0</span></p>
+      <p>⏱️ Atlikušais laiks: <span id="time">30</span> sek.</p>
     </div>
-    <button onclick="restartGame()">Sākt no jauna</button>
-    <script src="scripts.js"></script>
+
+    <div class="controls">
+      <button onclick="restartGame()">🔁 Restartēt spēli</button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/game.js') }}"></script>
 </body>
 </html>
+
 
 

@@ -32,9 +32,27 @@ function moveBall() {
 function updateTime() {
   timeLeft--;
   timeDisplay.textContent = timeLeft;
+
   if (timeLeft <= 0) {
     clearInterval(timer);
-    alert(`⏱️ Spēle beigusies!\n🎯 Tavi punkti: ${score}`);
+    const name = document.getElementById('playerName').value.trim();
+    if (name) {
+      const result = {
+        vards: name,
+        score: score,
+        datums: new Date().toISOString()
+      };
+      fetch('/submit_result', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(result)
+      }).then(() => {
+        alert(`⏱️ Spēle beigusies!\n🎯 Tavi punkti: ${score}`);
+        window.location.href = '/top';
+      });
+    } else {
+      alert(`Spēle beigusies! Ievadi savu vārdu, lai saglabātu rezultātu.`);
+    }
   }
 }
 
@@ -55,6 +73,5 @@ function restartGame() {
   timer = setInterval(updateTime, 1000);
 }
 
-window.onload = () => {
-  restartGame();
-}
+window.onload = restartGame;
+
