@@ -1,66 +1,54 @@
-<!-- game.html -->
 <!DOCTYPE html>
-<html lang="lv">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>Atrodi bumbu</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 40px;
-      background-color: #f0f0f0;
-    }
-    .cups-container {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 40px;
-    }
-    .cup {
-      width: 100px;
-      height: 120px;
-      background-color: #ccc;
-      border: 4px solid #666;
-      border-radius: 10px;
-      cursor: pointer;
-      position: relative;
-    }
-    .cup:hover {
-      background-color: #bbb;
-    }
-    .ball {
-      background: radial-gradient(circle, red 40%, darkred 70%);
-    }
-    #status {
-      margin-top: 30px;
-      font-size: 1.3em;
-    }
-    #restart {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 1em;
-      cursor: pointer;
-    }
-  </style>
+  <title>Atrodi bumbu!</title>
+  <link href="static/style.css" rel="stylesheet">
 </head>
 <body>
+  <div class="wrapper">
+    <div class="header">
+      <h1>Atrodi bumbu!</h1>
+      <ul>
+        <li><a href="/">Sākums</a></li>
+        <li><a href="game">Spēle</a></li>
+        <li><a href="top">Tops</a></li>
+        <li><a href="about">Par</a></li>
+      </ul>
+    </div>
 
-  <h1>Atrodi bumbu!</h1>
-  <p>Noklikšķini uz viena no kausiem, lai atrastu, kur paslēpta bumba.</p>
-
-  <div class="cups-container">
-    <div class="cup"></div>
-    <div class="cup"></div>
-    <div class="cup"></div>
+    <div class="content">
+      <div class="game">
+        <!-- Šeit ģenerējam laukumus, kur var slēpties bumba -->
+        <div class="field" id="F01" onclick="mekletBumbu('F01')"></div>
+        <div class="field" id="F02" onclick="mekletBumbu('F02')"></div>
+        <div class="field" id="F03" onclick="mekletBumbu('F03')"></div>
+        <div class="field" id="F04" onclick="mekletBumbu('F04')"></div>
+        <div class="field" id="F05" onclick="mekletBumbu('F05')"></div>
+        <div class="field" id="F06" onclick="mekletBumbu('F06')"></div>
+        <div class="field" id="F07" onclick="mekletBumbu('F07')"></div>
+        <div class="field" id="F08" onclick="mekletBumbu('F08')"></div>
+        <div class="field" id="F09" onclick="mekletBumbu('F09')"></div>
+      </div>
+    </div>
   </div>
 
-  <div id="status">Kur ir bumba?</div>
-  <button id="restart">Spēlēt vēlreiz</button>
+  <script>
+    // Ģenerējam nejaušu pozīciju bumbai
+    const bumbasPozicija = 'F0' + (Math.floor(Math.random() * 9) + 1);
 
-  <script src="top.js"></script>
+    function mekletBumbu(id) {
+      if (id === bumbasPozicija) {
+        document.getElementById(id).innerHTML = '🏀';
+        alert('Atradāt bumbu!');
+      } else {
+        document.getElementById(id).innerHTML = '❌';
+      }
+    }
+  </script>
 </body>
 </html>
+
 
 
 
