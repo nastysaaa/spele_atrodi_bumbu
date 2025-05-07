@@ -1,68 +1,42 @@
-let score = 0;
-let timeLeft = 30;
-let timer;
+// Mainīgais, lai uzraudzītu spēles stāvokli
 let gameStarted = false;
+let ball = document.getElementById('ball');
+let message = document.getElementById('message');
 
+// Funkcija, lai sāktu spēli
 function startGame() {
-  const name = document.getElementById("playerName").value.trim();
-  if (!name) {
-    alert("Lūdzu, ievadi savu vārdu!");
-    return;
+  if (gameStarted) {
+    return; // Ja spēle jau ir sākusies, neko nedarām
   }
 
-  if (gameStarted) return;
   gameStarted = true;
+  message.textContent = "Atrodi bumbu!"; // Spēles paziņojums
+  ball.style.display = 'block'; // Parādīt bumbu
 
-  score = 0;
-  timeLeft = 30;
-  document.getElementById("score").textContent = score;
-  document.getElementById("time").textContent = timeLeft;
+  // Nejauši parādīt bumbu uz ekrāna
+  showBall();
 
-  document.getElementById("ball").style.display = "block";
-  moveBall();
-
-  timer = setInterval(() => {
-    timeLeft--;
-    document.getElementById("time").textContent = timeLeft;
-    if (timeLeft <= 0) {
-      clearInterval(timer);
-      gameStarted = false;
-      document.getElementById("ball").style.display = "none";
-      alert(`${name}, laiks beidzies! Tavs rezultāts: ${score}`);
-    }
-  }, 1000);
+  // Uzlikt klikšķa notikumu uz bumbu
+  ball.addEventListener('click', function() {
+    alert('Tu atradi bumbu!');
+    ball.style.display = 'none'; // Paslēpt bumbu pēc atradīšanas
+    gameStarted = false; // Beigt spēli
+    message.textContent = "Spēle beigusies. Noklikšķiniet uz pogas, lai sāktu no jauna.";
+  });
 }
 
+// Funkcija, lai nejauši parādītu bumbu uz ekrāna
+function showBall() {
+  // Iegūst ekrāna platumu un augstumu
+  const container = document.getElementById('game-container');
+  const maxX = container.clientWidth - 60; // Bumbas platums
+  const maxY = container.clientHeight - 60; // Bumbas augstums
 
- function moveBall() {
-     if (!gameStarted) return;
-      
-     const container = document.getElementById("game-container");
-       const ball = document.getElementById("ball");
-      
-     const maxX = container.clientWidth - ball.offsetWidth;
-    const maxY = container.clientHeight - ball.offsetHeight;
-      
-    if (maxX <= 0 || maxY <= 0) {
-  // Ja konteiners nav vēl izmērāms, mēģini vēlāk
-          setTimeout(moveBall, 100);
-          return;
-        }
-      
-        score++;
-        document.getElementById("score").textContent = score;
-      
-        const x = Math.random() * maxX;
-        const y = Math.random() * maxY;
-      
-        ball.style.left = `${x}px`;
-        ball.style.top = `${y}px`;
-      }
+  // Nejauši ģenerē pozīcijas koordinātas bumbai
+  const x = Math.floor(Math.random() * maxX);
+  const y = Math.floor(Math.random() * maxY);
 
-function restartGame() {
-  clearInterval(timer);
-  gameStarted = false;
-  document.getElementById("score").textContent = "0";
-  document.getElementById("time").textContent = "30";
-  document.getElementById("ball").style.display = "none";
+  // Iestatām bumbas pozīciju
+  ball.style.left = `${x}px`;
+  ball.style.top = `${y}px`;
 }
